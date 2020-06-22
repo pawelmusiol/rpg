@@ -15,7 +15,7 @@ function App() {
   const [Data, setData] = useState("")
 
   const callAPI = () => {
-    fetch("http://localhost:9000/test")
+    fetch("http://localhost:9000/")
     .then(res => res.text())
     .then(res => setData(res))
   }
