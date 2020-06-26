@@ -1,0 +1,1 @@
+start cmd.exe @cmd /k "cd client && npm start" && cd api && nodemon --exec npm start
