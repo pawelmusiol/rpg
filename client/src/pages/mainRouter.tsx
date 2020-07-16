@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { 
   Switch,
   Route,
-  useLocation,
 } from "react-router-dom"
 
 
@@ -15,29 +14,27 @@ const Login = LoginPage
 
 const MainRouter = () => {
 
-    const [Data, setData] = useState("")
+    /*const [Data, setData] = useState()
 
     const callAPI = (urlPath:any) => {
-        
         fetch("http://127.0.0.1:9000" + urlPath)
-        .then(res => res.text())
+        .then(res => res.json())
         .then(res => setData(res))
     }
-
+    console.log(Data)
     let location = useLocation()
 
     useEffect(()=>{
         callAPI(location.pathname)
-    },[])
+    },[])*/
 
 
-    
 
   return (
     
       <div>
-        <LinkApi path={'/'} callAPI = {callAPI}>Strona Główna</LinkApi>
-        <LinkApi path={'/Login'} callAPI = {callAPI}>Login</LinkApi>
+        <LinkApi path={'/'}>Strona Główna</LinkApi>
+        <LinkApi path={'/Login'}>Login</LinkApi>
         <Switch>
           <Route exact path="/">
             <Home/>
@@ -49,7 +46,7 @@ const MainRouter = () => {
             <Login/>
           </Route>
         </Switch>
-        <div>{Data}</div>
+        <div>x</div>
       </div>
   );
 }

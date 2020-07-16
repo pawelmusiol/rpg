@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react'
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const LinkApi = (props:any) => {
 
@@ -8,18 +9,22 @@ const LinkApi = (props:any) => {
     }
     
     return (
-            <Link to={props.path} onClick={() => parentAPI()} style={styles.MenuButton}>
+            <MenuButton to={props.path} /*onClick={() => parentAPI()}*/ style={styles.MenuButton}>
                 {props.children}
-            </Link>
+            </MenuButton>
     )
 }
 
+const MenuButton = styled(Link)`
+    font-size: large;
+	background-color: red;
+	text-decoration: none;
+	margin: 1%;
+`
+
 const styles = {
 	MenuButton: {
-		fontSize: 'large',
-		backgroundColor: 'red',
-		textDecoration: 'none',
-		margin: '1%',
+		
 		
 	} as CSSProperties
 }
