@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { useLocation } from "react-router";
 import TableWidget from './TableWidget'
 import styled from 'styled-components'
-import api from './../api';
+import api from '../../api';
 
 function Tables() {
 

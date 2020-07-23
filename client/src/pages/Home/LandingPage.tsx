@@ -1,6 +1,6 @@
 import React, {CSSProperties} from "react";
 import styled, {keyframes} from 'styled-components'
-import mainBackground from './../img/mainBackground.jpg'
+import mainBackground from '../../img/mainBackground.jpg'
 
 function LandingPage() {
 

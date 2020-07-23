@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Provider } from "react-redux"
+import { createStore } from 'redux'
 import App from './App';
+import rootReducer from "./redux/reducers"
 import * as serviceWorker from './serviceWorker';
+import { composeWithDevTools } from "redux-devtools-extension"
+import { CookiesProvider } from 'react-cookie'
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools()
+  )
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store ={store}>
+      <CookiesProvider>
+        <App />
+      </CookiesProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

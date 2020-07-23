@@ -1,6 +1,6 @@
 import React from "react";
 import LandingPage from "./LandingPage";
-import Tables from "./Tables";
+import Tables from "../Tables/Tables";
 
 function Home() {
     document.body.style.overflowX='hidden'

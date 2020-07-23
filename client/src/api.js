@@ -10,14 +10,16 @@ const request = (endpoint, method = 'GET', data = null) => {
 	}
 	if (method === 'POST') {
 		config.body = JSON.stringify(data)
-		console.log(data)
 	}
 	if (endpoint === undefined) {
 		return null
 	}
 	
 	return fetch(url, config)
-	.then(res => res.json())
+	.then((res) => {
+		if(!res.ok) return res.status
+		else return res.json()})
+	
 }
 
 const get = (endpoint) => request(endpoint)

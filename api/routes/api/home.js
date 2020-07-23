@@ -1,7 +1,8 @@
 const router = require("express").Router()
+const auth = require("./../../controllers/Auth.controller")
 
-router.get('/', (req, res, next) => {
-    res.send(" ")
+router.post('/', (req, res, next) => {
+    auth.validateToken(req,res)
     
 })
 

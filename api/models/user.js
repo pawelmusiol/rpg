@@ -1,7 +1,4 @@
-const mysql = require("mysql")
-const dbConfig = require("../config/db.config")
 const connection = require("./db")
-const db = require("./db")
 
 exports.GetUserById = (id, callback) => {
 	conn = connection.connect()
@@ -11,15 +8,15 @@ exports.GetUserById = (id, callback) => {
 	connection.connEnd(conn)
 } 
 
-exports.GetUserByLogin = (login,callback) => {
-	console.log(login)
-	conn = connection.connect()
-	conn.query("SELECT * FROM users WHERE name LIKE ?",[login], (err,result) => {
-		if(err) throw err
-		return result
-	}
-	
-	)
-	
-	connection.connEnd(conn)
+exports.GetUserByLogin = (login) =>{
+	return new Promise(function(resolve,reject){
+		let returnValue = ''
+		conn = connection.connect()
+		conn.query("SELECT user_id, login, password FROM users WHERE login LIKE ?",[login], (err,result) => {
+			if(err) throw err;
+			returnValue = result
+			resolve(returnValue)
+		})
+		connection.connEnd(conn)
+	})
 }

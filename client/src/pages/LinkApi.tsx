@@ -3,13 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LinkApi = (props:any) => {
-
-    const parentAPI = () =>{
-        props.callAPI(props.path)
-    }
     
     return (
-            <MenuButton to={props.path} /*onClick={() => parentAPI()}*/ style={styles.MenuButton}>
+            <MenuButton to={props.path} style={styles.MenuButton}>
                 {props.children}
             </MenuButton>
     )
@@ -17,7 +13,7 @@ const LinkApi = (props:any) => {
 
 const MenuButton = styled(Link)`
     font-size: large;
-	background-color: red;
+	background-color: lightgrey;
 	text-decoration: none;
 	margin: 1%;
 `

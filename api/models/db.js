@@ -24,7 +24,7 @@ function connEnd(connection){
 }
 
 function getTables(callback){
-    connection.query("SELECT `name`, `system`, DATE_FORMAT(`expire_date`, '%d-%m-%Y') as 'expire_date' FROM rpg.games", function(err, res){
+    connection.query("SELECT `game_id`, `name`, `system`, DATE_FORMAT(`expire_date`, '%d-%m-%Y') as 'expire_date' FROM rpg.games", function(err, res){
         if (err) throw err;
         return callback(res)
         

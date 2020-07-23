@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 function TableWidget (props:any) {
 
-	const [Table, setTable] = useState({name: 'x', system: 'default', expire_date: "00-00-0000"})
+	const [Table, setTable] = useState({game_id: 0, name: 'x', system: 'default', expire_date: "00-00-0000"})
 	const [Loaded, setLoaded] = useState(false)
 	
 	if(props.TableData && Loaded === false){
@@ -17,7 +18,7 @@ function TableWidget (props:any) {
 			<Title>{Table.name}</Title>
 			<System>System: {Table.system}</System>
 			<ExData>Expire Date: {Table.expire_date}</ExData>
-			<JoinButton href="/a">Join</JoinButton>
+			<JoinButton to={"/table/"+Table.game_id}>Join</JoinButton>
 		</Container>
 	)
 }
@@ -39,7 +40,7 @@ const ExData = styled.p`
 
 `
 
-const JoinButton = styled.a`
+const JoinButton = styled(Link)`
 `
 
 export default TableWidget
