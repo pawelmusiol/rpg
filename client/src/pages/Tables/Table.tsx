@@ -1,5 +1,8 @@
 import React from 'react'
 
-export function Table(){
-	
+export default function Table(){
+
+	return(
+		<div>xd</div>
+	)
 }

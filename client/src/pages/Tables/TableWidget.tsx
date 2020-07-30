@@ -18,7 +18,7 @@ function TableWidget (props:any) {
 			<Title>{Table.name}</Title>
 			<System>System: {Table.system}</System>
 			<ExData>Expire Date: {Table.expire_date}</ExData>
-			<JoinButton to={"/table/"+Table.game_id}>Join</JoinButton>
+			<JoinButton to={"/Table/"+Table.game_id}>Join</JoinButton>
 		</Container>
 	)
 }

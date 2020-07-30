@@ -13,8 +13,10 @@ import User  from './user'
 import LoginPage from "./Login";
 import LinkApi from "./LinkApi";
 import Logout from './Logout'
+import Table from './Tables/Table'
 import api from '../api';
 import {GetUser, RemoveUser} from './../redux/actions'
+import CreateCharacter from './Character/CreateCharacter'
 
 
 const Login = LoginPage
@@ -52,10 +54,10 @@ const MainRouter = () => {
         {UserId === '' ? (
         <LinkApi path={'/Login'}>Login</LinkApi>
         ):(
-          <div style= {{display: 'inline-block'}}>
+          <>
         <LinkApi path={'/User/'+UserId}>User</LinkApi>
         <LinkApi path={'/Logout'}>Logout</LinkApi>
-          </div>
+          </>
         )}
         <Switch>
           <Route exact path="/">
@@ -73,8 +75,13 @@ const MainRouter = () => {
           <Route path='/Logout'>
             <Logout/>
           </Route>
+          <Route path='/Table/:id'>
+            <Table/>
+          </Route>
+          <Route path='/NewChar/:id'>
+            <CreateCharacter/>
+          </Route>
         </Switch>
-        <div>x</div>
       </div>
   );
 }

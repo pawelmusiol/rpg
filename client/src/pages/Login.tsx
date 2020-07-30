@@ -26,8 +26,8 @@ function LoginPage({ dispatch }:any){
                         if(x !== null) x.then((res) => {
                             dispatch(GetUser(res.token,res.login))
                             redirect(res.token)
-                            setCookie('Token', res.token,{maxAge: (10)})
-                            setCookie('Login', res.login,{maxAge: (10)})
+                            setCookie('Token', res.token,{maxAge: (100)})
+                            setCookie('Login', res.login,{maxAge: (100)})
                         })
                         
                     }}

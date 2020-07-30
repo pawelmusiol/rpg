@@ -25,11 +25,9 @@ exports.login = async (req, res) => {
 		const {login, password} = req.body
 
 		let user = await authenticate(login,password)
-		console.log(user)
 		if (user) {
 			let secret = process.env.JWT_SECRET
-			let token = jwt.sign({id: user.id}, secret, {expiresIn: 10})
-			console.log(token)
+			let token = jwt.sign({id: user.user_id}, secret, {expiresIn:100})
 			return res.status(HTTPStatus.OK).json({...user, token})
 		} 
 		else{
@@ -57,4 +55,11 @@ exports.validateToken = async(req,res) => {
 	} catch (error) {
 		return res.status(HTTPStatus.BAD_REQUEST).json(error)
 	}
+}
+exports.decodeToken = async (token) => {
+
+	const secret = process.env.JWT_SECRET;
+	let decoded = jwt.verify(token, secret)
+	
+	return decoded.id
 }
