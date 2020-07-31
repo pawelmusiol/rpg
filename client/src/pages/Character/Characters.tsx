@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
 import api from "../../api";
 import CharacterWidget from './CharacterWidget'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from "react-router-dom";
 
 export default function CharacterList(data:any){
 	const [Characters, setCharacters] = useState(Array)
+	let location = useLocation()
 
 
 	useEffect(() => {
@@ -18,9 +19,9 @@ export default function CharacterList(data:any){
 	return(
 		<div>
 			{Characters.map((character, index) => (
-				<CharacterWidget key={index} CharacterData={character} />
+				<CharacterWidget key={index} CharacterData={character} path={location.pathname} />
 			))}
-			<Link to={'/NewChar/'+data.id}>New Character</Link>
+			<Link to={'/Character/NewChar/'+data.id}>New Character</Link>
 		</div>
 	)
 }

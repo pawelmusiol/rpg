@@ -20,6 +20,14 @@ export default function CreateCharacter(){
 			<Redirect push to='/'/>
 		)
 	}
+
+	/*
+	Data.skills = [] //Umiejętności
+			Data.extras = [] //Atuty
+			Data.stunts = [] //Sztuczki aka Eq
+			Data.aspects = [] //Aspekty
+	*/
+
 	else{
 		return(
 			<Formik
@@ -37,12 +45,12 @@ export default function CreateCharacter(){
 					<LabelInput type='text' name='name'/>
 					<LabelInput type='text' name='description'/>
 
-					<MultiField title="aspects" type="string" length={3} theme={theme} />
-					<ManyMultiFields title="extras" type="string" length={1} theme={theme} />
-					<ManyMultiFields title="stunts" type="string" length={1} theme={theme} />
+					<MultiField title="aspects" type="string" length={3} theme={theme} />  {/* Aspekty */}
+					<ManyMultiFields title="extras" type="string" length={1} theme={theme} />  {/* Atuty */}
+					<ManyMultiFields title="stunts" type="string" length={1} theme={theme} /> {/* Sztuczki aka Eq */}
 
 
-					<ManyMultiFields title="skills" type="string" length={4} ></ManyMultiFields>
+					<ManyMultiFields title="skills" type="string" length={4} ></ManyMultiFields> {/* Umiejętności */}
 					<button type='submit' disabled={isSubmitting} >Submit</button>
 					
 				</Form>

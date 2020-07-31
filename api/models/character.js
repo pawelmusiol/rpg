@@ -15,14 +15,59 @@ exports.GetCharacterByUserId = (user_id) =>{
 	})
 }
 
-exports.AddCharacter = (character) => {
+exports.GetCharacterByIdAll = (id) => {
 	conn = connection.connect()
+	return new Promise(async(resolve,reject) => {
+		let sqlQuerySkills = "SELECT `skills_id`, `name`, `value` FROM skills WHERE character_id = ?"
+		let sqlQueryAspects = "SELECT `aspects_id`, `name` FROM aspects WHERE character_id = ?"
+		let sqlQueryStunts = "SELECT `stunt_id`, `name`, `type` FROM stunts WHERE character_id = ?"
+		let sqlQueryExtras = "SELECT `extra_id`, `name`, `desc` FROM extras WHERE character_id = ?"
+		let sqlQueryRoles = "SELECT `roles_id`, `type` FROM roles WHERE character_id = ?"
+		let Data = []
+		
+		Data.Skills = await new Promise((resolve,reject) =>{
+			conn.query(sqlQuerySkills, id, (err,result) => {
+				if (err) throw err
+				resolve(result)
+			})
+		})
+		Data.Aspects = await new Promise((resolve,reject) =>{
+			conn.query(sqlQueryAspects, id, (err,result) => {
+				if (err) throw err
+				resolve(result)
+			})
+		})
+		Data.Stunts = await new Promise((resolve,reject) =>{
+			conn.query(sqlQueryStunts, id, (err,result) => {
+				if (err) throw err
+				resolve(result)
+			})
+		})
+		Data.Extras = await new Promise((resolve,reject) =>{
+			conn.query(sqlQueryExtras, id, (err,result) => {
+				if (err) throw err
+				resolve(result)
+			})
+		})
+		Data.Roles = await new Promise((resolve,reject) =>{
+			conn.query(sqlQueryRoles, id, (err,result) => {
+				if (err) throw err
+				resolve(result)
+			})
+		})
+		connection.connEnd(conn)
+		resolve(Data)
+	})
+}
+
+exports.AddCharacter = (character) => {
 	return new Promise((resolve,reject)=>{
+		conn = connection.connect()
+
 		console.log(character)
 		let Data = []
 		Data.name = character.name
 		Data.description = character.description
-		Data.aspects = character.aspects
 		let EntryExtras = []
 		EntryExtras.push(character.extras1)
 
@@ -46,10 +91,11 @@ exports.AddCharacter = (character) => {
 			//Data
 
 			characterId = result.insertId
-			Data.skills = []
-			Data.extras = []
-			Data.stunts = []
-
+			Data.skills = [] //Umiejętności
+			Data.extras = [] //Atuty
+			Data.stunts = [] //Sztuczki aka Eq
+			Data.aspects = [] //Aspekty
+			
 			Data.skills = ConcatSkills(EntrySkills, characterId)
 			sqlQuerySkills = "INSERT INTO `skills` (`name`, `value`, `character_id`) VALUES ?"
 			console.log(Data.skills)
@@ -62,6 +108,11 @@ exports.AddCharacter = (character) => {
 			console.log(Data.stunts)
 			sqlQueryStunts = "INSERT INTO `stunts` (`name`, `type`, `character_id`) VALUES ?"
 
+			Data.aspects = ConcatTable(character.aspects, characterId)
+			sqlQueryAspects = "INSERT INTO `aspects` (`name`, `character_id`) VALUES ?"
+			console.log(Data.aspects)
+
+			sqlSueryRoles = "INSERT INTO `roles` (`type`, `character_id`) VALUES (0, ?)"
 			//Queries	
 			
 			conn.query(sqlQuerySkills,[Data.skills],(err,result) => {
@@ -75,6 +126,13 @@ exports.AddCharacter = (character) => {
 			conn.query(sqlQueryStunts, [Data.stunts],(err,result) => {
 				if (err) throw err
 			})	
+			conn.query(sqlQueryAspects, [Data.aspects],(err,result) => {
+				if (err) throw err
+			})	
+			conn.query(sqlQueryRoles, characterId,(err,result) => {
+				if (err) throw err
+			})	
+			conn
 			
 			connection.connEnd(conn)
 			resolve()
@@ -112,17 +170,4 @@ const ConcatSkills = (Data, characterId) => {
 		}
 	}
 	return Table
-}
-
-const MultipleInsert = (table,data,columns, values) => {
-	let AdditionalValues = ''
-	if (values) {
-		AdditionalValues = ',' + values
-	}
-	returnValue = '';
-	for (let index = 0; index < data.length; index++) {
-		returnValue+=`	INSERT INTO `+ table +` (` + columns + `) VALUES ('`+ data[index] +`',@CharID` + AdditionalValues + `);
-`	
-	}
-	return returnValue
 }

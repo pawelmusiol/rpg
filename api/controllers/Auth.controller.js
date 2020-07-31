@@ -7,6 +7,7 @@ const { response } = require("express")
 dotenv.config()
 
 const authenticate = async (login, password) => {
+	//Get User
 	var queryResult = await user.GetUserByLogin(login)
 	queryResult = queryResult[0]
 	if (!queryResult) {
@@ -27,7 +28,7 @@ exports.login = async (req, res) => {
 		let user = await authenticate(login,password)
 		if (user) {
 			let secret = process.env.JWT_SECRET
-			let token = jwt.sign({id: user.user_id}, secret, {expiresIn:100})
+			let token = jwt.sign({id: user.user_id}, secret, /*{expiresIn:100}*/)
 			return res.status(HTTPStatus.OK).json({...user, token})
 		} 
 		else{

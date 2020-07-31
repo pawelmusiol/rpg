@@ -16,7 +16,6 @@ const userReducer: Reducer = (state = [], action:AnyAction ) => {
 			
 			
 			return state.filter((user:any) => user.id === action.data)
-			break
 				
 		default:
 			return state

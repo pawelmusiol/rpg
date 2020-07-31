@@ -20,3 +20,10 @@ exports.AddCharacter = async (req,res) => {
 	let x = await Character.AddCharacter(characterParams)
 	console.log(x)
 }
+
+exports.GetCharacter = async (req,res) => {
+	let id = req.params.id
+	let data = await Character.GetCharacterByIdAll(id)
+	console.log(data)
+	res.send(data)
+}

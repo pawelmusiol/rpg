@@ -17,6 +17,7 @@ import Table from './Tables/Table'
 import api from '../api';
 import {GetUser, RemoveUser} from './../redux/actions'
 import CreateCharacter from './Character/CreateCharacter'
+import Character from './Character/Character'
 
 
 const Login = LoginPage
@@ -78,8 +79,11 @@ const MainRouter = () => {
           <Route path='/Table/:id'>
             <Table/>
           </Route>
-          <Route path='/NewChar/:id'>
+          <Route path='/Character/NewChar/:id'>
             <CreateCharacter/>
+          </Route>
+          <Route path='/Character/:id'>
+            <Character/>
           </Route>
         </Switch>
       </div>
