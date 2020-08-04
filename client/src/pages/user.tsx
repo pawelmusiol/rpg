@@ -10,7 +10,7 @@ interface IUser {
 
 function User(){
 
-	let errorMessage = "Najpierw Sie Zaloguj"
+	let errorMessage = "Najpierw Sie Zaloguj"	
 
 	let UserData  = useSelector((state:IUser) => state.user)
 	UserData = UserData[0]

@@ -23,7 +23,12 @@ exports.AddCharacter = async (req,res) => {
 
 exports.GetCharacter = async (req,res) => {
 	let id = req.params.id
-	let data = await Character.GetCharacterByIdAll(id)
-	console.log(data)
-	res.send(data)
+	await Character.GetCharacterByIdAll(id)
+	//let DataToSend = []
+	.then((data)=> {
+		//console.log(data.toJSON())
+		res.send(data)
+	})
+	
+
 }

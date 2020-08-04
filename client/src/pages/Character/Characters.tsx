@@ -19,7 +19,7 @@ export default function CharacterList(data:any){
 	return(
 		<div>
 			{Characters.map((character, index) => (
-				<CharacterWidget key={index} CharacterData={character} path={location.pathname} />
+				<CharacterWidget key={index} CharacterData={character} path={location.pathname} location={location} />
 			))}
 			<Link to={'/Character/NewChar/'+data.id}>New Character</Link>
 		</div>

@@ -24,10 +24,14 @@ export default function CharacterWidget (props:any){
 				{Character.desc}
 			</p>
 			<MoreButton to={CharacterPath}> More </MoreButton>
+			<DeleteButton to={props.location} onClick={DeleteCharacter}>Delete</DeleteButton>
 		</CharacterContainer>
 	)
 }
 
+const DeleteCharacter =() => {
+
+}
 
 const Name = styled.div`
 	
@@ -40,8 +44,12 @@ const MoreButton = styled(Link)`
 
 `
 
+const DeleteButton = styled(Link)`
+
+`
+
 const CharacterContainer = styled.div`
 	display: grid;
-	grid-template-columns: minmax(auto, 20%) 70% minmax(auto, 10%);
+	grid-template-columns: minmax(auto, 20%) 60% minmax(auto, 10%) minmax(auto, 10%);
 	grid-column-gap:10px;
 `

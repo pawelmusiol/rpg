@@ -15,15 +15,27 @@ exports.GetCharacterByUserId = (user_id) =>{
 	})
 }
 
+SqlQuery = (Query) =>{
+	return 
+}
+
 exports.GetCharacterByIdAll = (id) => {
 	conn = connection.connect()
 	return new Promise(async(resolve,reject) => {
+		let sqlQueryCharacter ="SELECT `character_id`, `name`, `description` FROM rpg.character WHERE character_id = ?"
 		let sqlQuerySkills = "SELECT `skills_id`, `name`, `value` FROM skills WHERE character_id = ?"
 		let sqlQueryAspects = "SELECT `aspects_id`, `name` FROM aspects WHERE character_id = ?"
 		let sqlQueryStunts = "SELECT `stunt_id`, `name`, `type` FROM stunts WHERE character_id = ?"
 		let sqlQueryExtras = "SELECT `extra_id`, `name`, `desc` FROM extras WHERE character_id = ?"
 		let sqlQueryRoles = "SELECT `roles_id`, `type` FROM roles WHERE character_id = ?"
 		let Data = []
+
+		Data.CharacterData = await new Promise(function(resolve,reject){
+			conn.query(sqlQueryCharacter, id, (err,result) => {
+				if(err) throw err;
+				resolve(result)
+			})
+		})
 		
 		Data.Skills = await new Promise((resolve,reject) =>{
 			conn.query(sqlQuerySkills, id, (err,result) => {
@@ -55,8 +67,19 @@ exports.GetCharacterByIdAll = (id) => {
 				resolve(result)
 			})
 		})
+		let DataToSend = {
+			'Character': Data.CharacterData[0],
+			'Skills' : Data.Skills,
+			'Aspects' : Data.Aspects,
+			'Stunts' : Data.Stunts,
+			'Extras' : Data.Extras,
+			'Roles' : Data.Roles
+		} 
+
+		
 		connection.connEnd(conn)
-		resolve(Data)
+		console.log(DataToSend)
+		resolve(DataToSend)
 	})
 }
 
